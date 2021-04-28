@@ -75,7 +75,7 @@ def register():
         print("Account generation failed due to internet connection. Try again!")
         init()
         
-    #account_number = [first_name, last_name, email, password, 0]
+    account_number = [first_name, last_name, email, password, 0]
          
     print("Your account has been created")
     print("== ==== ====== ===== ==")
