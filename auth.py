@@ -40,7 +40,7 @@ def login():
     account_number_from_user = input("What is your account number? \n")
     
     is_valid_account_number = validation.account_number_validation(account_number_from_user)
-    
+
     if is_valid_account_number:
     
         password = input("What is your password? \n")
@@ -51,7 +51,7 @@ def login():
                     bank_operations(user_details)
                                     
             else:
-                print("Invalid account or password")
+                print("Invalid account or password hhhh")
                 login()
                      
     else:
@@ -75,7 +75,7 @@ def register():
         print("Account generation failed due to internet connection. Try again!")
         init()
         
-    account_number = [first_name, last_name, email, password, 0]
+    #account_number = [first_name, last_name, email, password, 0]
          
     print("Your account has been created")
     print("== ==== ====== ===== ==")
@@ -88,21 +88,24 @@ def bank_operations(user):
     
     print("Welcome %s %s " % (user[0], user[1]))
     
-    selectedOption = int(input("What would you like to do? (1) Deposit (2) Withdrawal (3) Transfer (4) Complaints (5) Logout \n"))
+    selectedOption = int(input("What would you like to do? (1) Deposit (2) Withdrawal (3) Transfer (4) Complaints (5)current_balance (6) Logout \n"))
           
     if selectedOption == 1:
-        deposit_operation()
+        deposit_operation(user)
             
     elif selectedOption == 2:
-        withdrawal_operation()
+        withdrawal_operation(user)
             
     elif selectedOption == 3:
-        transfer_operation()
+        transfer_operation(user)
            
     elif selectedOption == 4:
-        complaints_operation()
-           
+        complaints_operation(user)
+        
     elif selectedOption == 5:
+        current_balance(user)
+           
+    elif selectedOption == 6:
         logout()
             
     else:
@@ -113,30 +116,35 @@ def bank_operations(user):
 def generate_account_number():
     return random.randrange(00000000000,9999999999) 
 
+#['Onyii', 'Peace', 'peace@gmail.com', 'Peace', 500]
    
-def deposit_operation():
-    input("How much would you like to deposit? \n")
-    deposit_operation += current_balance
-    print(f"you have deposited {current_balance} into your account")
+def deposit_operation(user):
+    deposit = int(input("How much would you like to deposit? \n"))
+    user[4] += deposit
+    print(f"you have deposited {deposit} into your account")
+    print(f"your current balance is {user[4]} ")
     
-def current_balance(user_details):
-    return user_details[4]  
+def current_balance(user):
+        print(f"your current balance is {user[4]} ")
     
 
-def withdrawal_operation():
-    input("How much would you like to withdraw? \n")
-    
+def withdrawal_operation(user):
+    withdrawal = int(input("How much would you like to withdraw? \n"))
+    user[4] -= withdrawal
     print("Take your cash.")
+    print(f"your current balance is {user[4]} ")
+
     
     
 def transfer_operation():
-    input("How much would you like to transfer? \n")
-    
-    print("Transfer")
+    transfer = int(input("How much would you like to transfer? \n"))
+    user[4] -= transfer
+    destination = int(input("account number you want to transfer to \n"))
+    print(f"you transferred {user[4]} to  {destination}")
+
     
 def complaints_operation():
     input("What issue will you like to report? \n")
-    
     print("Thank you for contacting us.")
     
     
@@ -146,4 +154,3 @@ def logout():
     
    
 init()
-
